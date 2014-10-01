@@ -280,6 +280,49 @@ Emmited when a error occurs during the transmission of the message.
 mpns.on('transmissionError', function (error, payload, pushUri) {});
 ```
 
+### SMS notification with Freemobile subscription
+
+#### Example
+
+```js
+// Create a new freemobile sender.
+var fm = require('push-notify').freemobile({
+  user: 'your freemobile identifier',
+  password: 'your SMS notification key'
+});
+
+// Send notification.
+fm.send({
+  id: 'a unique id',
+  payload: 'the message you want to send'
+});
+```
+
+#### Notification
+
+```
+  {string} id a unique id used to identify message in transmitted/transmissionError callbacks
+  {string} payload the SMS message content
+```
+
+#### Events
+
+##### transmitted
+
+Emmited when a notification was correctly transmitted to FreeMobile servers.
+
+```js
+fm.on('transmitted', function (id) {});
+```
+
+##### transmissionError
+
+Emmited when a error occurs during the transmission of the message.
+
+```js
+fm.on('transmissionError', function (err, id) {});
+```
+
 ## Used modules
 
 * apn: [node-apn](https://github.com/argon/node-apn)
@@ -287,6 +330,7 @@ mpns.on('transmissionError', function (error, payload, pushUri) {});
 * c2dm: [node-c2dm](https://github.com/SpeCT/node-c2dm)
 * mpns: [node-mpns](https://github.com/jeffwilcox/mpns)
 * wns: [wns](https://github.com/tjanczuk/wns)
+* request: [request](https://github.com/mikeal/request)
 
 ## License
 
